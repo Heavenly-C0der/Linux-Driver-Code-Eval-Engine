@@ -1,0 +1,11 @@
+# Python standard libraries used (no pip packages needed)
+# Ensure these tools are installed in the system
+
+# Required System Tools:
+# - gcc (for compilation)
+# - clang-tidy (for static analysis)
+
+# If running on Linux, install with:
+# sudo apt update && sudo apt install build-essential clang-tidy
+
+# Python version: 3.8+
