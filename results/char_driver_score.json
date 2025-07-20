@@ -1,0 +1,41 @@
+{
+    "compilation": {
+        "compiled": false,
+        "warnings_count": 0,
+        "errors_count": 1,
+        "stderr": [
+            "D:\\coding\\Notebooks\\Projects\\H2LoopAI\\generated_code\\char_driver.c:1:10: fatal error: linux/module.h: No such file or directory",
+            "    1 | #include <linux/module.h>",
+            "      |          ^~~~~~~~~~~~~~~~",
+            "compilation terminated."
+        ]
+    },
+    "code_quality": {
+        "style_compliance": 0.9,
+        "documentation": 0.6,
+        "maintainability": 0.65
+    },
+    "static_analysis": {
+        "pattern_warnings": {
+            "missing_error_checks": 0,
+            "magic_numbers": 1,
+            "missing_kfree": 0,
+            "goto_usage": 0
+        },
+        "kernel_score": 95.0
+    },
+    "clang_tidy": {
+        "warnings": -1
+    },
+    "security": {
+        "buffer_safety": 0.9,
+        "input_validation": 0.7
+    },
+    "performance": {
+        "efficiency": 0.8
+    },
+    "advanced": {
+        "debug_support": 0.0
+    },
+    "overall_score": 42.33
+}
