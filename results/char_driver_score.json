@@ -11,9 +11,9 @@
         ]
     },
     "code_quality": {
-        "style_compliance": 0.9,
-        "documentation": 0.6,
-        "maintainability": 0.65
+        "style_compliance": 0.94,
+        "documentation": 0.0,
+        "maintainability": 0.7
     },
     "static_analysis": {
         "pattern_warnings": {
@@ -28,14 +28,14 @@
         "warnings": -1
     },
     "security": {
-        "buffer_safety": 0.9,
-        "input_validation": 0.7
+        "buffer_safety": 1.0,
+        "input_validation": 0.3
     },
     "performance": {
-        "efficiency": 0.8
+        "efficiency": 1.0
     },
     "advanced": {
         "debug_support": 0.0
     },
-    "overall_score": 42.33
+    "overall_score": 37.18
 }
