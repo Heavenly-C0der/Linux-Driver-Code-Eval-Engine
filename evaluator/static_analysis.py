@@ -1,19 +1,54 @@
 import re
 
+def remove_comments_and_strings(code: str) -> str:
+    # Remove string literals
+    code = re.sub(r'"(?:\\.|[^"\\])*"', '', code)  # removes "..."
+    
+    # Remove single-line comments
+    code = re.sub(r'//.*', '', code)
+    
+    # Remove multi-line comments
+    code = re.sub(r'/\*[\s\S]*?\*/', '', code)
+    
+    return code
+
+def extract_variable_names(code: str) -> list:
+    decls = []
+    type_pattern = r'\b(?:int|char|float|double|long|short|unsigned)\b'
+
+    # Match type lines: int x, y=5, *ptr, arr[10];
+    lines = re.findall(rf'{type_pattern}[^;]*;', code)
+
+    for line in lines:
+        # Remove type keyword 
+        line = re.sub(type_pattern, '', line).strip().rstrip(';')
+
+        # Split by comma
+        variables = [v.strip() for v in line.split(',')]
+
+        for var in variables:
+            # Remove pointer or array syntax and initialization
+            var = re.sub(r'[*\[\]\s=].*$', '', var)
+            if var:
+                decls.append(var)
+
+    return decls
+
+
 def detect_unused_variables(code: str) -> int:
-    #  matches int x;, char *ptr;, etc.
-    decl_pattern = re.compile(r'\b(?:int|char|float|double|long|short|unsigned)\s+[*]*\s*(\w+)\s*(=|;)', re.MULTILINE)
-    matches = decl_pattern.findall(code)
+    clean_code = remove_comments_and_strings(code)
 
-    # Extract variable names
-    variable_names = [m[0] for m in matches]
+    # Remove loop headers (so we don't count loop vars)
+    clean_code = re.sub(r'for\s*\(([^)]+)\)', '', clean_code)
 
-    # Count how many of these are not used elsewhere
+    # Extract all declared variables (basic types, arrays, pointers, multiple vars)
+    variable_names = extract_variable_names(code)
+
+    # Count unused ones
     unused_count = 0
     for var in variable_names:
-        # Escape variable name to use in regex
         usage_pattern = re.compile(rf'\b{re.escape(var)}\b')
-        if len(usage_pattern.findall(code)) <= 1:  # 1 match = only the declaration
+        if len(usage_pattern.findall(clean_code)) <= 1:
             unused_count += 1
 
     return unused_count
