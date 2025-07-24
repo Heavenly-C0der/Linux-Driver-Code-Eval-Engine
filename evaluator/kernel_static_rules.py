@@ -11,9 +11,9 @@ def check_kernel_patterns(code: str) -> dict:
     lines = code.splitlines()
 
     for line in lines:
-        if re.search(r'[^=!<>]=[^=]', line) and 'if' in line and '==' not in line:
+        if re.search(r'[^=!<>]=[^=]', line) and 'if' in line and '==' not in line: #checks for suspicious use of relational operators
             issues["missing_error_checks"] += 1
-        if re.search(r'\b\d{3,}\b', line):
+        if re.search(r'\b\d{3,}\b', line): # checks for unclear mentions of large numbers without context
             issues["magic_numbers"] += 1
         if 'kmalloc' in line and 'kfree' not in code:
             issues["missing_kfree"] += 1
