@@ -1,0 +1,1 @@
+"Write a basic Linux character device driver module in C that registers a simple in-memory buffer with read and write operations."
